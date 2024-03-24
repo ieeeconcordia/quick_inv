@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -30,7 +29,7 @@ class MyHomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
-        children: [
+        children: <Widget>[
           const SizedBox(height: 50),
           Text(
             title,
@@ -68,18 +67,81 @@ class MyHomePage extends StatelessWidget {
               ),
             ],
           ),
-          const Row(children: [
-            CatgeoryCard(categoryName: "Capacitor"),
-            CatgeoryCard(categoryName: "resistivity")
-          ])
+          const Padding(
+            padding: EdgeInsets.all(10),
+            child: Row(children: [
+              CategoryCard(categoryName: "Capacitors"),
+              CategoryCard(categoryName: "Resistors")
+            ]),
+          ),
+          const Align(
+            alignment: Alignment.centerLeft,
+            child: Padding(
+              padding: EdgeInsets.only(left: 8),
+              child:
+                  Text("View all components", style: TextStyle(fontSize: 20)),
+            ),
+          ),
+          const Column(
+            children: [ComponentCard(componentName: "Resistor OHM", categoryName: "Resistors", imgThumbnail: "fdsafd")],
+          )
+        ],
+      ),
+      bottomNavigationBar: NavigationBar(destinations: const [],),
+    );
+  }
+}
+
+class ComponentCard extends StatelessWidget {
+  const ComponentCard(
+      {super.key,
+      required this.componentName,
+      required this.categoryName,
+      required this.imgThumbnail});
+
+  final String componentName;
+  final String categoryName;
+  final String imgThumbnail;
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      child: Row(
+        children: [
+          Image(image: AssetImage(imgThumbnail)),
+          Column(
+            children: [
+              const Text(
+                "Component Name",
+                style: TextStyle(color: Colors.grey),
+              ),
+              const SizedBox(height: 10),
+              Text(componentName,
+                  style: const TextStyle(
+                      fontWeight: FontWeight.bold, fontSize: 15))
+            ],
+          ),
+          const SizedBox(width: 10),
+          Column(
+            children: [
+              const Text(
+                "Category Name",
+                style: TextStyle(color: Colors.grey),
+              ),
+              const SizedBox(height: 10),
+              Text(categoryName,
+                  style: const TextStyle(
+                      fontWeight: FontWeight.bold, fontSize: 15))
+            ],
+          )
         ],
       ),
     );
   }
 }
 
-class CatgeoryCard extends StatelessWidget {
-  const CatgeoryCard({super.key, required this.categoryName});
+class CategoryCard extends StatelessWidget {
+  const CategoryCard({super.key, required this.categoryName});
 
   final String categoryName;
 
