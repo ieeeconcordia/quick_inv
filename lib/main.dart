@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quick_inv/add_items/main.dart';
 
 void main() {
   runApp(const MyApp());
@@ -125,56 +126,62 @@ class WelcomePage extends StatelessWidget {
 }
 
 class ActionsPage extends StatelessWidget {
+  const ActionsPage({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          FilledButton(
-            onPressed: () => {print("")},
-            child: const Row(
-              children: [
-                Text("New Item"),
-                SizedBox(width: 15),
-                Icon(Icons.add)
-              ],
+    return Scaffold(
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            SizedBox(
+              width: 150,
+              child: FilledButton(
+                onPressed: () => {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => const FirstAddPage()))
+                },
+                style: const ButtonStyle(
+                    backgroundColor:
+                        MaterialStatePropertyAll<Color>(Colors.blue)),
+                child: const Row(
+                  children: [Text("New Item"), Icon(Icons.add)],
+                ),
+              ),
             ),
-            style: const ButtonStyle(
-                backgroundColor: MaterialStatePropertyAll<Color>(Colors.blue)),
-          ),
-          const SizedBox(height: 10),
-          FilledButton(
-            onPressed: () => {print("")},
-            child: const Row(
-              children: [
-                Text("Update Item"),
-                SizedBox(width: 15),
-                Icon(Icons.edit)
-              ],
+            const SizedBox(height: 10),
+            SizedBox(
+              width: 150,
+              child: FilledButton(
+                onPressed: () => {print("")},
+                style: const ButtonStyle(
+                    backgroundColor:
+                        MaterialStatePropertyAll<Color>(Colors.green)),
+                child: const Row(
+                  children: [Text("Update Item"), Icon(Icons.edit)],
+                ),
+              ),
             ),
-            style: const ButtonStyle(
-                backgroundColor: MaterialStatePropertyAll<Color>(Colors.green)),
-          ),
-          SizedBox(height: 10),
-          FilledButton(
-            onPressed: () => {print("")},
-            child: const Row(
-              children: [
-                Text("Delete Item"),
-                SizedBox(width: 15),
-                Icon(Icons.minimize_rounded)
-              ],
+            const SizedBox(height: 10),
+            SizedBox(
+              width: 150,
+              child: FilledButton(
+                onPressed: () => {print("")},
+                style: const ButtonStyle(
+                    backgroundColor:
+                        MaterialStatePropertyAll<Color>(Colors.red)),
+                child: const Row(
+                  children: [Text("Delete Item"), Icon(Icons.minimize_rounded)],
+                ),
+              ),
             ),
-            style: const ButtonStyle(
-                backgroundColor: MaterialStatePropertyAll<Color>(Colors.red)),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
 }
-
 
 class ComponentCard extends StatelessWidget {
   const ComponentCard(
