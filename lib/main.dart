@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:quick_inv/add_items/main.dart';
+import 'package:quick_inv/add_items/FirstAddPage.dart';
+
+import 'edit_items/FirstUpdatePage.dart';
 
 void main() {
   runApp(const MyApp());
@@ -139,8 +141,10 @@ class ActionsPage extends StatelessWidget {
               width: 150,
               child: FilledButton(
                 onPressed: () => {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => const FirstAddPage()))
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const FirstAddPage()))
                 },
                 style: const ButtonStyle(
                     backgroundColor:
@@ -154,7 +158,12 @@ class ActionsPage extends StatelessWidget {
             SizedBox(
               width: 150,
               child: FilledButton(
-                onPressed: () => {print("")},
+                onPressed: () => {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const FirstUpdatePage()))
+                },
                 style: const ButtonStyle(
                     backgroundColor:
                         MaterialStatePropertyAll<Color>(Colors.green)),
