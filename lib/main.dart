@@ -1,5 +1,8 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:quick_inv/DeleteItemScreen.dart';
+import 'package:quick_inv/add_items/FirstAddPage.dart';
+
+import 'edit_items/FirstUpdatePage.dart';
 
 void main() {
   runApp(const MyApp());
@@ -12,74 +15,243 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'QuickInv',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.greenAccent),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Welcome to QuickInv🗄️!'),
+      home: MyHomePage(),
     );
   }
 }
 
-class MyHomePage extends StatelessWidget {
-  const MyHomePage({super.key, required this.title});
-  final String title;
+class MyHomePage extends StatefulWidget {
+  @override
+  State<MyHomePage> createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  int currentPageIdx = 0;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
+      body: <Widget>[WelcomePage(), ActionsPage()][currentPageIdx],
+      bottomNavigationBar: NavigationBar(
+        selectedIndex: currentPageIdx,
+        destinations: const <Widget>[
+          NavigationDestination(
+              icon: Icon(Icons.home_outlined),
+              label: "Home",
+              selectedIcon: Icon(Icons.home)),
+          NavigationDestination(
+              icon: Icon(Icons.lock_outline),
+              label: "Actions",
+              selectedIcon: Icon(Icons.lock)),
+        ],
+        onDestinationSelected: (int index) {
+          setState(() {
+            currentPageIdx = index;
+          });
+        },
+      ),
+    );
+  }
+}
+
+class WelcomePage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return const Column(
+      children: <Widget>[
+        SizedBox(height: 50),
+        Text(
+          "Welcome to QuickInv! 🗄️",
+          style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+        ),
+        SizedBox(height: 30),
+        Row(
+          mainAxisAlignment: MainAxisAlignment
+              .start, // Align children horizontally at the start
+          children: [
+            Padding(
+              padding: EdgeInsets.only(
+                  left: 20.0), // Add left padding to align with the title
+              child: Text(
+                "What are you looking for today?",
+                style: TextStyle(fontSize: 18),
+              ),
+            ),
+          ],
+        ),
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: 20),
+          child: SearchBar(hintText: "Search..."),
+        ),
+        SizedBox(height: 20),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Padding(
+              padding: EdgeInsets.all(20),
+              child: Text(
+                "Quick Categories",
+                style: TextStyle(fontSize: 18),
+              ),
+            ),
+          ],
+        ),
+        Padding(
+          padding: EdgeInsets.all(10),
+          child: Row(children: [
+            CategoryCard(categoryName: "Capacitors"),
+            CategoryCard(categoryName: "Resistors")
+          ]),
+        ),
+        Align(
+          alignment: Alignment.centerLeft,
+          child: Padding(
+            padding: EdgeInsets.only(left: 8),
+            child: Text("View all components", style: TextStyle(fontSize: 20)),
+          ),
+        ),
+        Column(
+          children: [
+            ComponentCard(
+                componentName: "Resistor OHM",
+                categoryName: "Resistors",
+                imgThumbnail: "assets/resist.jpg")
+          ],
+        )
+      ],
+    );
+  }
+}
+
+class ActionsPage extends StatelessWidget {
+  const ActionsPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            SizedBox(
+              width: 150,
+              child: FilledButton(
+                onPressed: () => {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const FirstAddPage()))
+                },
+                style: const ButtonStyle(
+                    backgroundColor:
+                        MaterialStatePropertyAll<Color>(Colors.blue)),
+                child: const Row(
+                  children: [Text("New Item"), Icon(Icons.add)],
+                ),
+              ),
+            ),
+            const SizedBox(height: 10),
+            SizedBox(
+              width: 150,
+              child: FilledButton(
+                onPressed: () => {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const FirstUpdatePage()))
+                },
+                style: const ButtonStyle(
+                    backgroundColor:
+                        MaterialStatePropertyAll<Color>(Colors.green)),
+                child: const Row(
+                  children: [Text("Update Item"), Icon(Icons.edit)],
+                ),
+              ),
+            ),
+            const SizedBox(height: 10),
+            SizedBox(
+              width: 150,
+              child: FilledButton(
+                onPressed: () => {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const DeleteItemScreen()))
+                },
+                style: const ButtonStyle(
+                    backgroundColor:
+                        MaterialStatePropertyAll<Color>(Colors.red)),
+                child: const Row(
+                  children: [Text("Delete Item"), Icon(Icons.minimize_rounded)],
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class ComponentCard extends StatelessWidget {
+  const ComponentCard(
+      {super.key,
+      required this.componentName,
+      required this.categoryName,
+      required this.imgThumbnail});
+
+  final String componentName;
+  final String categoryName;
+  final String imgThumbnail;
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      child: Row(
         children: [
-          const SizedBox(height: 50),
-          Text(
-            title,
-            style: const TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
-          ),
-          const SizedBox(height: 30),
-          const Row(
-            mainAxisAlignment: MainAxisAlignment
-                .start, // Align children horizontally at the start
+          Image(
+              image: AssetImage(imgThumbnail),
+              height: 100,
+              width: 100,
+              fit: BoxFit.fitWidth),
+          Column(
             children: [
-              Padding(
-                padding: EdgeInsets.only(
-                    left: 20.0), // Add left padding to align with the title
-                child: Text(
-                  "What are you looking for today?",
-                  style: TextStyle(fontSize: 18),
-                ),
+              const Text(
+                "Component Name",
+                style: TextStyle(color: Colors.grey),
               ),
+              const SizedBox(height: 10),
+              Text(componentName,
+                  style: const TextStyle(
+                      fontWeight: FontWeight.bold, fontSize: 15))
             ],
           ),
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20),
-            child: SearchBar(hintText: "Search..."),
-          ),
-          const SizedBox(height: 20),
-          const Row(
-            mainAxisAlignment: MainAxisAlignment.start,
+          const SizedBox(width: 10),
+          Column(
             children: [
-              Padding(
-                padding: EdgeInsets.all(20),
-                child: Text(
-                  "Quick Categories",
-                  style: TextStyle(fontSize: 18),
-                ),
+              const Text(
+                "Category Name",
+                style: TextStyle(color: Colors.grey),
               ),
+              const SizedBox(height: 10),
+              Text(categoryName,
+                  style: const TextStyle(
+                      fontWeight: FontWeight.bold, fontSize: 15))
             ],
-          ),
-          const Row(children: [
-            CatgeoryCard(categoryName: "Capacitor"),
-            CatgeoryCard(categoryName: "resistivity")
-          ])
+          )
         ],
       ),
     );
   }
 }
 
-class CatgeoryCard extends StatelessWidget {
-  const CatgeoryCard({super.key, required this.categoryName});
+class CategoryCard extends StatelessWidget {
+  const CategoryCard({super.key, required this.categoryName});
 
   final String categoryName;
 
