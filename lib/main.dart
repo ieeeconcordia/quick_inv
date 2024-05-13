@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quick_inv/DeleteItemScreen.dart';
 import 'package:quick_inv/add_items/FirstAddPage.dart';
 
 import 'edit_items/FirstUpdatePage.dart';
@@ -176,7 +177,12 @@ class ActionsPage extends StatelessWidget {
             SizedBox(
               width: 150,
               child: FilledButton(
-                onPressed: () => {print("")},
+                onPressed: () => {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const DeleteItemScreen()))
+                },
                 style: const ButtonStyle(
                     backgroundColor:
                         MaterialStatePropertyAll<Color>(Colors.red)),
