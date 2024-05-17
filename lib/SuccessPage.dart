@@ -25,7 +25,7 @@ class SuccessPage extends StatelessWidget {
             const SizedBox(height: 15),
             FilledButton(
                 onPressed: () => Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => WelcomePage())),
+                    MaterialPageRoute(builder: (context) => const MyHomePage())),
                 child: const Text("Back to Main"))
           ],
         ),
