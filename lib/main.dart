@@ -20,12 +20,14 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.greenAccent),
         useMaterial3: true,
       ),
-      home: MyHomePage(),
+      home: const MyHomePage(),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
+  const MyHomePage({super.key});
+
   @override
   State<MyHomePage> createState() => _MyHomePageState();
 }
@@ -36,7 +38,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: <Widget>[WelcomePage(), ActionsPage()][currentPageIdx],
+      body: <Widget>[const WelcomePage(), const ActionsPage()][currentPageIdx],
       bottomNavigationBar: NavigationBar(
         selectedIndex: currentPageIdx,
         destinations: const <Widget>[
@@ -54,42 +56,73 @@ class _MyHomePageState extends State<MyHomePage> {
             currentPageIdx = index;
           });
         },
+        backgroundColor: const Color(0xFF0077b6),
       ),
     );
   }
 }
 
 class WelcomePage extends StatelessWidget {
+  const WelcomePage({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return const Column(
+    return Column(
       children: <Widget>[
-        SizedBox(height: 50),
-        Text(
-          "Welcome to QuickInv! 🗄️",
-          style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
-        ),
-        SizedBox(height: 30),
-        Row(
-          mainAxisAlignment: MainAxisAlignment
-              .start, // Align children horizontally at the start
-          children: [
-            Padding(
-              padding: EdgeInsets.only(
-                  left: 20.0), // Add left padding to align with the title
-              child: Text(
-                "What are you looking for today?",
-                style: TextStyle(fontSize: 18),
+        Container(
+          color: const Color(0xFF0077b6),
+          child: Column(
+            children: [
+              const SizedBox(height: 50),
+              const Text(
+                "Welcome to QuickInv! 🗄️",
+                style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
               ),
-            ),
-          ],
+              const SizedBox(height: 30),
+              const Row(
+                mainAxisAlignment: MainAxisAlignment
+                    .start, // Align children horizontally at the start
+                children: [
+                  Padding(
+                    padding: EdgeInsets.only(
+                        left: 20.0), // Add left padding to align with the title
+                    child: Text(
+                      "What are you looking for today?",
+                      style: TextStyle(fontSize: 18),
+                    ),
+                  ),
+                ],
+              ),
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 20),
+                child: SearchBar(hintText: "Search..."),
+              ),
+              const SizedBox(height: 15),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  FilledButton(
+                    onPressed: () {},
+                    style: const ButtonStyle(
+                        backgroundColor:
+                        MaterialStatePropertyAll<Color>(Colors.black)),
+                    child: const Text("Search Tags"),
+                  ),
+                  const SizedBox(width: 10),
+                  FilledButton(
+                    onPressed: () {},
+                    style: const ButtonStyle(
+                        backgroundColor:
+                        MaterialStatePropertyAll<Color>(Colors.black)),
+                    child: const Text("RFID Search"),
+                  )
+                ],
+              ),
+              const SizedBox(height: 20),
+            ],
+          ),
         ),
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: 20),
-          child: SearchBar(hintText: "Search..."),
-        ),
-        SizedBox(height: 20),
-        Row(
+        const Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Padding(
@@ -101,21 +134,21 @@ class WelcomePage extends StatelessWidget {
             ),
           ],
         ),
-        Padding(
+        const Padding(
           padding: EdgeInsets.all(10),
           child: Row(children: [
             CategoryCard(categoryName: "Capacitors"),
             CategoryCard(categoryName: "Resistors")
           ]),
         ),
-        Align(
+        const Align(
           alignment: Alignment.centerLeft,
           child: Padding(
             padding: EdgeInsets.only(left: 8),
             child: Text("View all components", style: TextStyle(fontSize: 20)),
           ),
         ),
-        Column(
+        const Column(
           children: [
             ComponentCard(
                 componentName: "Resistor OHM",
@@ -149,7 +182,7 @@ class ActionsPage extends StatelessWidget {
                 },
                 style: const ButtonStyle(
                     backgroundColor:
-                        MaterialStatePropertyAll<Color>(Colors.blue)),
+                    MaterialStatePropertyAll<Color>(Colors.blue)),
                 child: const Row(
                   children: [Text("New Item"), Icon(Icons.add)],
                 ),
@@ -167,7 +200,7 @@ class ActionsPage extends StatelessWidget {
                 },
                 style: const ButtonStyle(
                     backgroundColor:
-                        MaterialStatePropertyAll<Color>(Colors.green)),
+                    MaterialStatePropertyAll<Color>(Colors.green)),
                 child: const Row(
                   children: [Text("Update Item"), Icon(Icons.edit)],
                 ),
@@ -185,7 +218,7 @@ class ActionsPage extends StatelessWidget {
                 },
                 style: const ButtonStyle(
                     backgroundColor:
-                        MaterialStatePropertyAll<Color>(Colors.red)),
+                    MaterialStatePropertyAll<Color>(Colors.red)),
                 child: const Row(
                   children: [Text("Delete Item"), Icon(Icons.minimize_rounded)],
                 ),
@@ -201,9 +234,9 @@ class ActionsPage extends StatelessWidget {
 class ComponentCard extends StatelessWidget {
   const ComponentCard(
       {super.key,
-      required this.componentName,
-      required this.categoryName,
-      required this.imgThumbnail});
+        required this.componentName,
+        required this.categoryName,
+        required this.imgThumbnail});
 
   final String componentName;
   final String categoryName;
