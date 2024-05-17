@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:quick_inv/main.dart';
 
-class SuccessPage extends StatelessWidget {
-  const SuccessPage({super.key, required this.succMsg});
+class SuccessScreen extends StatelessWidget {
+  const SuccessScreen({super.key, required this.succMsg});
   final String succMsg;
 
   @override

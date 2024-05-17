@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:quick_inv/SuccessPage.dart';
+import 'package:quick_inv/screens/SuccessScreen.dart';
 
 class DeleteItemScreen extends StatefulWidget {
   const DeleteItemScreen({super.key});
@@ -101,7 +101,7 @@ class _DeleteItemScreenState extends State<DeleteItemScreen> {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => const SuccessPage(
+                        builder: (context) => const SuccessScreen(
                             succMsg:
                                 "The item has successfully been deleted from the inventory <3")));
               },

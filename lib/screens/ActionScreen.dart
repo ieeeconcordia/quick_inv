@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:quick_inv/add_items/FirstAddPage.dart';
 import 'package:quick_inv/edit_items/FirstUpdatePage.dart';
-import 'package:quick_inv/DeleteItemScreen.dart';
+import 'package:quick_inv/screens/DeleteItemScreen.dart';
 
 class ActionScreen extends StatelessWidget {
   const ActionScreen({super.key});
