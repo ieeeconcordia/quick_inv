@@ -38,6 +38,7 @@ dependencies:
   dropdown_search: ^5.0.6
   image_picker: ^1.0.7
   dotted_border: ^2.1.0
+  pocketbase: ^0.18.1
 
 dev_dependencies:
   flutter_test:
