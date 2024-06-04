@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:quick_inv/add_items/FirstAddPage.dart';
 import 'package:quick_inv/edit_items/FirstUpdatePage.dart';
 import 'package:quick_inv/screens/DeleteItemScreen.dart';
@@ -14,7 +16,8 @@ class ActionScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             SizedBox(
-              width: 150,
+              width: 200,
+              height: 50,
               child: FilledButton(
                 onPressed: () => {
                   Navigator.push(
@@ -24,15 +27,23 @@ class ActionScreen extends StatelessWidget {
                 },
                 style: const ButtonStyle(
                     backgroundColor:
-                    MaterialStatePropertyAll<Color>(Colors.blue)),
+                        MaterialStatePropertyAll<Color>(Colors.blue)),
                 child: const Row(
-                  children: [Text("New Item"), Icon(Icons.add)],
+                  children: [
+                    Text(
+                      "New Item",
+                      style: TextStyle(fontSize: 16),
+                    ),
+                    Spacer(),
+                    Icon(Icons.add)
+                  ],
                 ),
               ),
             ),
-            const SizedBox(height: 10),
+            const SizedBox(height: 24),
             SizedBox(
-              width: 150,
+              width: 200,
+              height: 50,
               child: FilledButton(
                 onPressed: () => {
                   Navigator.push(
@@ -42,15 +53,23 @@ class ActionScreen extends StatelessWidget {
                 },
                 style: const ButtonStyle(
                     backgroundColor:
-                    MaterialStatePropertyAll<Color>(Colors.green)),
+                        MaterialStatePropertyAll<Color>(Colors.green)),
                 child: const Row(
-                  children: [Text("Update Item"), Icon(Icons.edit)],
+                  children: [
+                    Text(
+                      "Update Item",
+                      style: TextStyle(fontSize: 16),
+                    ),
+                    Spacer(),
+                    Icon(Icons.edit)
+                  ],
                 ),
               ),
             ),
-            const SizedBox(height: 10),
+            const SizedBox(height: 24),
             SizedBox(
-              width: 150,
+              width: 200,
+              height: 50,
               child: FilledButton(
                 onPressed: () => {
                   Navigator.push(
@@ -60,9 +79,16 @@ class ActionScreen extends StatelessWidget {
                 },
                 style: const ButtonStyle(
                     backgroundColor:
-                    MaterialStatePropertyAll<Color>(Colors.red)),
+                        MaterialStatePropertyAll<Color>(Colors.red)),
                 child: const Row(
-                  children: [Text("Delete Item"), Icon(Icons.minimize_rounded)],
+                  children: [
+                    Text(
+                      "Delete Item",
+                      style: TextStyle(fontSize: 16),
+                    ),
+                    Spacer(),
+                    Icon(Icons.minimize_rounded)
+                  ],
                 ),
               ),
             ),
