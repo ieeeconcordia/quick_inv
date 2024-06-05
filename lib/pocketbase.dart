@@ -1,3 +1,3 @@
 import 'package:pocketbase/pocketbase.dart';
 
-final pb = PocketBase("https://quickinvpb.ieeeconcordia.ca");
+final pb = PocketBase("https://pbquickinv.happyfir.com");
