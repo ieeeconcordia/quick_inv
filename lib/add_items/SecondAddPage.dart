@@ -16,7 +16,7 @@ class SecondAddPage extends StatelessWidget {
         ),
         const SizedBox(height: 15),
         const Text("Add the {item_type} info"),
-        SizedBox(height: 15,),
+        const SizedBox(height: 15,),
         // Input data that will depend on the {item_type}
         FilledButton(onPressed: () => {
           print("")

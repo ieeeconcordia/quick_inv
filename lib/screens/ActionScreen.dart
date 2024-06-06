@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:quick_inv/add_items/FirstAddPage.dart';
 import 'package:quick_inv/edit_items/FirstUpdatePage.dart';
 import 'package:quick_inv/screens/DeleteItemScreen.dart';
