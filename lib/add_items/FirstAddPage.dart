@@ -13,6 +13,7 @@ class FirstAddPage extends StatefulWidget {
 class _FirstAddPageState extends State<FirstAddPage> {
   final TextEditingController typeController = TextEditingController();
   String? selectedType;
+  String? selectedTagId; // Variable to store the selected tag ID
 
   List<RecordModel> allTags = [];
 
@@ -50,7 +51,7 @@ class _FirstAddPageState extends State<FirstAddPage> {
           children: [
             const SizedBox(height: 15),
             const Text(
-              "Add a new Item",
+              "",
               style: TextStyle(fontSize: 25),
             ),
             const SizedBox(height: 15),
@@ -58,22 +59,18 @@ class _FirstAddPageState extends State<FirstAddPage> {
             const SizedBox(height: 15),
 
             if (allTags.isNotEmpty)
-              DropdownMenu<String>(
-                initialSelection: "",
-                controller: typeController,
-                requestFocusOnTap: true,
-                label: const Text("Component Type"),
-                width: 250,
-                onSelected: (String? type) {
+              DropdownButton<String>(
+                value: selectedType,
+                onChanged: (String? type) {
                   setState(() {
                     selectedType = type;
+                    selectedTagId = allTags.firstWhere((tag) => tag.data['tag_name'] == type).id; // Store the selected tag ID
                   });
                 },
-                dropdownMenuEntries: allTags
-                    .map<DropdownMenuEntry<String>>((RecordModel tag) {
-                  return DropdownMenuEntry<String>(
+                items: allTags.map<DropdownMenuItem<String>>((RecordModel tag) {
+                  return DropdownMenuItem<String>(
                     value: tag.data['tag_name'],
-                    label: tag.data['tag_name'],
+                    child: Text(tag.data['tag_name']),
                   );
                 }).toList(),
               )
@@ -87,7 +84,7 @@ class _FirstAddPageState extends State<FirstAddPage> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const SecondAddPage(),
+                      builder: (context) => SecondAddPage(tagId: selectedTagId!), // Pass the selected tag ID to the next page
                     ),
                   );
                 },
