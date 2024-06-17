@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class SecondAddPage extends StatelessWidget {
-  const SecondAddPage({super.key});
+  final String tagId;
+  const SecondAddPage({super.key, required this.tagId});
 
   @override
   Widget build(BuildContext context) {

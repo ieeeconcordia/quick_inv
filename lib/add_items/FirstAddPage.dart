@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:pocketbase/pocketbase.dart';
 import 'package:quick_inv/add_items/SecondAddPage.dart';
@@ -19,15 +21,15 @@ class _FirstAddPageState extends State<FirstAddPage> {
 
   Future<void> fetchAllTags() async {
     try {
-      print("Fetching tags");
+      log("Fetching tags");
       List<RecordModel> tags =
           await pb.collection('tags').getFullList(sort: '-created');
       setState(() {
-        print(tags);
+        debugPrint('$tags');
         allTags = tags;
       });
     } catch (e) {
-      print(e);
+      debugPrint('$e');
     }
   }
 
@@ -80,8 +82,8 @@ class _FirstAddPageState extends State<FirstAddPage> {
             Center(
               child: FilledButton(
                 onPressed: () async {
-                  await pb.collection('parts').create(body: {});
-                  Navigator.push(
+                  await pb.collection('parts').create(body: {"tag_id": selectedTagId!});
+                  await Navigator.push(
                     context,
                     MaterialPageRoute(
                       builder: (context) => SecondAddPage(tagId: selectedTagId!), // Pass the selected tag ID to the next page
