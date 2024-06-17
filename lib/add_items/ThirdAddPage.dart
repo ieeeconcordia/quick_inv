@@ -35,7 +35,7 @@ class _ThirdAddPageState extends State<ThirdAddPage> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           const Text(
-            "Add new item",
+            "",
             style: TextStyle(fontSize: 25),
           ),
           const SizedBox(height: 15),

@@ -66,7 +66,9 @@ class _FirstAddPageState extends State<FirstAddPage> {
                 onChanged: (String? type) {
                   setState(() {
                     selectedType = type;
-                    selectedTagId = allTags.firstWhere((tag) => tag.data['tag_name'] == type).id; // Store the selected tag ID
+                    selectedTagId = allTags
+                        .firstWhere((tag) => tag.data['tag_name'] == type)
+                        .id; // Store the selected tag ID
                   });
                 },
                 items: allTags.map<DropdownMenuItem<String>>((RecordModel tag) {
@@ -77,16 +79,18 @@ class _FirstAddPageState extends State<FirstAddPage> {
                 }).toList(),
               )
             else
-              const CircularProgressIndicator(), // Show a loading indicator while fetching tags
+              const CircularProgressIndicator(),
+            // Show a loading indicator while fetching tags
             const SizedBox(height: 20),
             Center(
               child: FilledButton(
-                onPressed: () async {
-                  await pb.collection('parts').create(body: {"tag_id": selectedTagId!});
-                  await Navigator.push(
+                onPressed: () {
+                  Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => SecondAddPage(tagId: selectedTagId!), // Pass the selected tag ID to the next page
+                      builder: (context) => SecondAddPage(
+                          tagId:
+                              selectedTagId!), // Pass the selected tag ID to the next page
                     ),
                   );
                 },
